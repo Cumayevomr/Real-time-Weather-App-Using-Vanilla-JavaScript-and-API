@@ -642,6 +642,14 @@ article.container::before {
   color: var(--on-bg-aqi-5);
 }
 
+.highlight-card.two .card-item {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.highlight-card.two .label-1 { margin-block-end: 4px; }
+
 
 
 
