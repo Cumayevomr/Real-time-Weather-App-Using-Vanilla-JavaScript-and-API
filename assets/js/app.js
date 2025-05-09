@@ -77,8 +77,13 @@ searchField.addEventListener("input", function () {
                     `;
 
                     searchResult.querySelector("[data-search-list]").appendChild(searchItem);
-                    items.push(searchItem.querySelector.apply('[data-search-toggler]'));
+                    items.push(searchItem.querySelector('[data-search-toggler]'));
                 }
+
+                addEventOnElements(items, "click", function () {
+                    toggleSearch();
+                    searchResult.classList.remove("active");
+                })
             });
         }, searchTimeoutDuration);
     }
@@ -99,9 +104,9 @@ const errorContent = document.querySelector("[data-error-content]");
  */
 export const updateWeather = function (lat, lon) {
 
-    loading.style.display = "grid";
+    // loading.style.display = "grid";
     container.style.overflowY = "hidden";
-    container.classList.contains("fade-in") ?? container.classList.remove("fade-in");
+    // container.classList.remove("fade-in");
     errorContent.style.display = "none";
 
     const currentWeatherSection = document.querySelector("[data-current-weather]");
@@ -167,6 +172,33 @@ export const updateWeather = function (lat, lon) {
                         </ul>
         `;
 
+        fetchData(url.reverseGeo(lat, lon), function ([{ name, country }]) {
+            card.querySelector("[data-location]").innerHTML = `${name}, ${country}`
+        });
+
+        currentWeatherSection.appendChild(card);
+
+        /**
+         * TODAY'S HIGHLIGHTS
+         */
+        fetchData(url.airPollution(lat, lon), function (airPollution) {
+
+        const [{
+            main: { aqi },
+            components: { no2, o3, so2, so2_5 }
+        }] = airPollution.list;
+
+        const card = document.createElement("div");
+        card.classList.add("card", "card-lg");
+
+        card.innerHTML = `
+        
+        `;
+
+        });
+
     });
 
 }
+
+export const error404 = function () {  }
