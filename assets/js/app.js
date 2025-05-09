@@ -76,7 +76,8 @@ searchField.addEventListener("input", function () {
                         <a href="#/weather?lat=${lat}&lon=${lon}" class="item-link has-state" aria-label="${name} weather" data-search-toggler></a>
                     `;
 
-                    
+                    searchResult.querySelector("[data-search-list]").appendChild(searchItem);
+                    items.push(searchItem.querySelector.apply('[data-search-toggler]'));
                 }
             });
         }, searchTimeoutDuration);
