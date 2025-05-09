@@ -83,3 +83,25 @@ export const mps_to_kmh = mps => {
     return mph / 1000;
 }
 
+export const aqiText = {
+    1: {
+        level: "Good",
+        message: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione quam non odit fuga consectetur! Aliquid."
+    },
+    2: {
+        level: "Fair",
+        message: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla sapiente, illum in soluta commodi voluptatem vel molestiae esse, dicta eaque ipsum error recusandae aperiam reiciendis asperiores, hic temporibus"
+    },
+    3: {
+        level: "Moderate",
+        message: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla sapiente, illum in soluta commodi voluptatem  hic temporibus"
+    },
+    4: {
+        level: "Poor",
+        message: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla sapiente, illum in soluta commodi voluptatem vel molestiae esse, dicta eaque  hic temporibus"
+    },
+    5: {
+        level: "Very Poor",
+        message: "Lorem ipsum dolor sit amet consectetur adipisicing elit. dicta eaque cumque asperiores, hic temporibus"
+    }
+}
