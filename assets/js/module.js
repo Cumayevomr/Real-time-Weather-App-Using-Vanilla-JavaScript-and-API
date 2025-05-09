@@ -7,8 +7,6 @@
 
 "use strict";
 
-import { data } from "autoprefixer";
-
 export const weekDayNames = [
     "Sunday",
     "Monday",
