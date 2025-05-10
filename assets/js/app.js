@@ -325,6 +325,73 @@ export const updateWeather = function (lat, lon) {
 
         });
 
+        /**
+         * 24H FORECAST SECTION
+         */
+        fetchData(url.forecast(lat, lon), function (forecast) {
+
+            const {
+                list: forecastList,
+                city: { timezone }
+            } = forecast;
+
+            hourlySection.innerHTML = `
+
+            <h2 class="title-2">Today at</h2>
+                    <div class="slider-container">
+                        <ul class="slider-list" data-temp></li>
+
+                        </ul>
+
+                        <ul class="slider-list" data-wind>
+
+                            <li class="slider-item">
+                                <div class="card card-sm slider-card">
+
+                                    <p class="body-3">03 PM</p>
+
+                                    <img src="./assets/images/weather_icons/direction.png" width="48" height="48" loading="lazy" alt="" 
+                                    class="weather-icon" title="">
+
+                                    <p class="body-3">12 km/h</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+            `;
+
+            for (const [index, data] of forecastList.entries()) {
+
+                if (index > 7) break;
+
+                const {
+                    dt: dataTimeUnix,
+                    main: { temp },
+                    weather,
+                    wind: { deg: windDirection, speed: windSpeed }
+                } = data
+                const [{ icon, description }] = weather
+
+                const tempLi = document.createElement("li");
+                tempLi.classList.add("slider-item");
+
+                tempLi.innerHTML = `
+                    <div class="card card-sm slider-card">
+
+                        <p class="body-3">${module.getHours(dataTimeUnix, timezone)}/p>
+
+                        <img src="./assets/images/weather_icons/${icon}.png" width="48" height="48" loading="lazy" alt="${description}" 
+                        class="weather-icon" title="${description}">
+
+                        <p class="body-3">${parseInt(temp)}&deg;</p>
+
+                    </div>
+                `;
+
+            }
+
+        })
+
     });
 
 }
