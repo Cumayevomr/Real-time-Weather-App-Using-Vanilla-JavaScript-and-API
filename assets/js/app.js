@@ -343,20 +343,7 @@ export const updateWeather = function (lat, lon) {
 
                         </ul>
 
-                        <ul class="slider-list" data-wind>
-
-                            <li class="slider-item">
-                                <div class="card card-sm slider-card">
-
-                                    <p class="body-3">03 PM</p>
-
-                                    <img src="./assets/images/weather_icons/direction.png" width="48" height="48" loading="lazy" alt="" 
-                                    class="weather-icon" title="">
-
-                                    <p class="body-3">12 km/h</p>
-                                </div>
-                            </li>
-                        </ul>
+                        <ul class="slider-list" data-wind></ul>
                     </div>
             `;
 
@@ -365,7 +352,7 @@ export const updateWeather = function (lat, lon) {
                 if (index > 7) break;
 
                 const {
-                    dt: dataTimeUnix,
+                    dt: dateTimeUnix,
                     main: { temp },
                     weather,
                     wind: { deg: windDirection, speed: windSpeed }
@@ -377,16 +364,32 @@ export const updateWeather = function (lat, lon) {
 
                 tempLi.innerHTML = `
                     <div class="card card-sm slider-card">
-
                         <p class="body-3">${module.getHours(dataTimeUnix, timezone)}/p>
 
                         <img src="./assets/images/weather_icons/${icon}.png" width="48" height="48" loading="lazy" alt="${description}" 
                         class="weather-icon" title="${description}">
-
                         <p class="body-3">${parseInt(temp)}&deg;</p>
 
                     </div>
                 `;
+                hourlySection.querySelector("[data-temp]").appendChild(tempLi);
+
+                const windLi = document.createElement("li");
+                windLi.classList.add("slider-item");
+
+                windLi.innerHTML = `
+                    <div class="card card-sm slider-card">
+
+                        <p class="body-3">${module.getHours(dateTimeUnix, timezone)}</p>
+
+                            <img src="./assets/images/weather_icons/direction.png" width="48" height="48" loading="lazy" alt="direction" 
+                            class="weather-icon" style="transform: rotate(${windDirection - 180}deg)">
+
+                        <p class="body-3">${parseInt(module.mps_to_kmh(windSpeed))}km/h</p>
+                    </div>
+                `;
+
+                hourlySection.querySelector("[data-wind]").appendChild(windLi);
 
             }
 
