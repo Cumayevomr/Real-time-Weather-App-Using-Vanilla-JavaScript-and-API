@@ -133,7 +133,7 @@ export const updateWeather = function (lat, lon) {
         const {
             weather,
             dt: dateUnix,
-            sys: { sunsire: sunsireUnixUTC, sunset: sunsetUnixUTC },
+            sys: { sunrise: sunriseUnixUTC, sunset: sunsetUnixUTC },
             main: { temp, feels_like, pressure, humidity },
             visibility,
             timezone
@@ -249,9 +249,9 @@ export const updateWeather = function (lat, lon) {
                                         <span class="m-icon">clear_day</span>
 
                                         <div>
-                                            <p class="label-1">Sunsire</p>
+                                            <p class="label-1">Sunrise</p>
 
-                                            <p class="title-1">${module.getTime(sunsireUnixUTC,
+                                            <p class="title-1">${module.getTime(sunriseUnixUTC,
                                                 timezone
                                             )}</p>
                                         </div>
@@ -339,9 +339,7 @@ export const updateWeather = function (lat, lon) {
 
             <h2 class="title-2">Today at</h2>
                     <div class="slider-container">
-                        <ul class="slider-list" data-temp></li>
-
-                        </ul>
+                        <ul class="slider-list" data-temp></ul>
 
                         <ul class="slider-list" data-wind></ul>
                     </div>
@@ -364,7 +362,7 @@ export const updateWeather = function (lat, lon) {
 
                 tempLi.innerHTML = `
                     <div class="card card-sm slider-card">
-                        <p class="body-3">${module.getHours(dateTimeUnix, timezone)}/p>
+                        <p class="body-3">${module.getHours(dateTimeUnix, timezone)}</p>
 
                         <img src="./assets/images/weather_icons/${icon}.png" width="48" height="48" loading="lazy" alt="${description}" 
                         class="weather-icon" title="${description}">
@@ -445,4 +443,4 @@ export const updateWeather = function (lat, lon) {
 
 }
 
-export const error404 = function () {  }
+export const error404 = () => errorContent.style.display = "flex";
